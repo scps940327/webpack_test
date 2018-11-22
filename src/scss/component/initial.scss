@@ -1,0 +1,450 @@
+$pc-media: 1024px;
+$pcs-media: 1023px;
+$md-media: 768px;
+$mds-media: 767px;
+$m-media: 480px;
+$ms-media: 479px;
+
+$lte7:false;
+
+$max-width: 1300px;
+$width_full: 100%;
+
+//電腦
+@mixin pc-width {
+    @media all and (min-width: $pc-media) {
+        @content;
+    }
+}
+
+//小螢幕電腦
+@mixin md-width {
+    @media all and (min-width: $md-media) {
+        @content;
+    }
+}
+
+//大平板
+@mixin sms-width {
+    @media all and (max-width: $pcs-media) {
+        @content;
+    }
+}
+
+//平板
+@mixin sm-width {
+    @media all and (max-width: $mds-media) {
+        @content;
+    }
+}
+
+//手機
+@mixin xs-width {
+    @media all and (max-width: $ms-media) {
+        @content;
+    }
+}
+
+@mixin inline_block($inline_width: auto, $inline_vertical: middle) {
+    display: inline-block;
+    vertical-align: $inline_vertical;
+    width: $inline_width;
+    box-sizing: border-box;
+}
+
+@mixin button_initial {
+    text-align: center;
+    padding: 8px 3px;
+    color: #FFF;
+    font-size: 1em;
+    border: 0;
+    width: 110px;
+    vertical-align: middle;
+
+    @include sm-width {
+        font-size: 0.9em;
+    }
+}
+
+@mixin bg_img{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@mixin simple_txt{
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+}
+
+@mixin font_rwd{
+    @include md-width{
+        font-size: 16px;
+    }
+    @include sm-width{
+        font-size: 14px;
+    }
+}
+
+@mixin header_menu_icon_cross{
+    .icon_btn {
+        width: 30px;
+        height: 23px;
+        position: relative;
+        cursor: pointer;
+
+        span{
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #FFF;
+            opacity: 1;
+            left: 0;
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            transform: rotate(0deg);
+            -webkit-transition: .25s ease-in-out;
+            -moz-transition: .25s ease-in-out;
+            -o-transition: .25s ease-in-out;
+            transition: .25s ease-in-out;
+
+            &:nth-child(1) {
+                top: 0px;
+                -webkit-transform-origin: right center;
+                -moz-transform-origin: right center;
+                -o-transform-origin: right center;
+                transform-origin: right center;
+            }
+
+            &:nth-child(2) {
+                top: calc(50% - 1px);
+                -webkit-transform-origin: right center;
+                -moz-transform-origin: right center;
+                -o-transform-origin: right center;
+                transform-origin: right center;
+            }
+
+            &:nth-child(3) {
+                bottom: 0;
+                -webkit-transform-origin: right center;
+                -moz-transform-origin: right center;
+                -o-transform-origin: right center;
+                transform-origin: right center;
+            }
+        }
+
+        &.open{
+            span{
+                &:nth-child(1) {
+                    -webkit-transform: rotate(-45deg);
+                    -moz-transform: rotate(-45deg);
+                    -o-transform: rotate(-45deg);
+                    transform: rotate(-45deg);
+                }
+
+                &:nth-child(2) {
+                    width: 0%;
+                    opacity: 0;
+                }
+
+                &:nth-child(3) {
+                    -webkit-transform: rotate(45deg);
+                    -moz-transform: rotate(45deg);
+                    -o-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+}
+
+@mixin max_width () {
+    max-width: $max-width;
+    margin: auto;
+}
+
+@mixin opacity($opacity_num) {
+    opacity: $opacity_num;
+    filter:alpha(opacity=#{$opacity_num*100});
+    transition: opacity 0.5s;
+}
+
+%clearfix { 
+    @if $lte7 { 
+        *zoom: 1; 
+    } 
+
+    &:before, 
+    &:after { 
+        content: ""; 
+        display: table; 
+        font: 0/0 a; 
+    } 
+    
+    &:after { 
+        clear: both; 
+    } 
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Microsoft Jhenghei", "微軟正黑體", \5FAE\8EDF\6B63\9ED1\9AD4, Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust:none;
+}
+
+a img {
+    border: 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: inherit;
+
+    a:link {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:active {
+        text-decoration: none;
+    }
+
+    &:focus{
+        outline: 0;
+        color: inherit;
+    }
+}
+
+.edit_style {
+    padding: 2em 0;
+    max-width: 1300px;
+    margin: auto;
+    @include font_rwd;
+
+    img {
+        max-width: 100%;
+        height: auto !important;
+    }
+
+    * {
+        max-width: 100%;
+    }
+
+    table {
+        display: block;
+    }
+
+    table thead,
+    table tbody,
+    table tfoot {
+        display: table;
+        width: 100%;
+    }
+
+    &::after {
+        content: '';
+        clear: both;
+    }
+
+    a{
+        color: #0054AF;
+
+        &:link {
+            text-decoration: underline;
+        }
+
+        &:visited {
+            text-decoration: underline;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:active {
+            text-decoration: underline;
+        }
+    }
+
+    ul {
+        -webkit-padding-start:40px;
+
+        li {
+            list-style:disc;
+        }
+    }
+
+    ol {
+        -webkit-padding-start:40px;
+
+        li {
+            list-style:decimal;
+        }
+    }
+}
+
+input, textarea, select{
+    vertical-align:middle;
+    border: 1px #CCC solid;
+    box-sizing: border-box;
+    -webkit-appearance: none;  /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
+    -moz-appearance: none;     /* FireFox */
+    appearance: none;
+    &:focus{
+        outline-style: none;
+        box-shadow: none;
+        border-radius: 0;
+        border: 1px $main_color solid !important;
+    }
+}
+
+select{
+    padding:6px 25px 6px 10px;
+    background: url("../img/icon_triangle.png") calc(100% - 10px) center/auto 10px no-repeat;
+    font-family: "Microsoft Jhenghei", "微軟正黑體", \5FAE\8EDF\6B63\9ED1\9AD4, Verdana, Arial, Helvetica, sans-serif;
+}
+
+input{
+    padding:7px 12px;
+    font-family: "Microsoft Jhenghei", "微軟正黑體", \5FAE\8EDF\6B63\9ED1\9AD4, Verdana, Arial, Helvetica, sans-serif;
+}
+
+textarea{
+    padding:7px 12px;
+    height: 150px;
+    font-family: "Microsoft Jhenghei", "微軟正黑體", \5FAE\8EDF\6B63\9ED1\9AD4, Verdana, Arial, Helvetica, sans-serif;
+}
+
+input[type="checkbox"]{
+    -webkit-appearance: checkbox;
+}
+
+input[type="radio"]{
+    -webkit-appearance: radio;
+}
+
+input[type="date"]{
+    padding: 4px 8px;
+}
+
+button, .btn{
+    background-color: $main_color;
+    color:#FFF;
+    padding:9px 5px;
+    border: 0;
+    vertical-align: middle;
+    border-radius: 5px;
+    width: 100px;
+    cursor: pointer;
+    text-align: center;
+    -webkit-appearance: none;  /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
+    -moz-appearance: none;     /* FireFox */
+    appearance: none;
+    @include font_rwd;
+    font-family: "Microsoft Jhenghei", "微軟正黑體", \5FAE\8EDF\6B63\9ED1\9AD4, Verdana, Arial, Helvetica, sans-serif;
+
+    &:focus{
+        outline-style: none;
+        box-shadow: none;
+        border-radius: 5px;
+    }
+}
+
+div {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+table {
+    display: table;
+    width: 100%;
+    background-color: transparent;
+}
+
+tr {
+    display: table-row;
+    width: 100%;
+    line-height: 36px;
+}
+
+td {
+    display: table-cell;
+}
+
+.invalid {
+    border: 1px solid #F00;
+    background: #FF9;
+}
+
+.notify {
+    margin: 0 0 0 5px;
+    font-size: 10px;
+    color: #F00;
+}
+
+.iframe-rwd {
+    position: relative;
+    padding-bottom: 65.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+
+    .iframe-rwd iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.max_width {
+    @include max_width;
+}
+
+.col-sm-3{
+    @include sm-width{
+        width: 50%;
+        float: left;
+
+        &:nth-child(2n+1){
+            clear: both;
+        }
+    }
+    @include xs-width{
+        width: 100%;
+    }
+}
+
+.img_rwd{
+    img{
+        width: 100%;
+    }
+}
