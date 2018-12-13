@@ -1,6 +1,95 @@
 @import "component/color.scss";
 @import "component/initial.scss";
 
-input{
-	border-color: red;
+.label{
+  background-color: #777;
+  color: #FFF;
+  padding: 3px 7px;
+  border-radius: 3px;
+  @include inline_block;
+  margin-right: 5px;
+}
+
+.section{
+	padding: 0 5%;
+}
+
+.section_title{
+  color: $main_color;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: 10px 0;
+  width: 30%;
+  border-bottom: 1px $main_color solid;
+  position: relative;
+  margin-bottom: 20px;
+  @include sm-width{
+      width: 50%;
+  }
+  @include xs-width{
+      width: 80%;
+  }
+
+  &:before{
+    content: '.';
+    position: absolute;
+    bottom: -4px;
+    left: -2px;
+    font-size: 30px;
+  }
+}
+
+.job_item{
+    font-size: 0;
+    @include md-width{
+        padding: 30px 0;
+        border-bottom: 1px #CCC solid;
+    }
+    @include sm-width{
+        padding-bottom: 30px;
+    }
+
+    .date{
+        color: #FFF;
+        font-size: 14px;
+        @include inline_block(auto,top);
+        @include round_txt($second_color, 50px);
+    }
+
+    .item_txt{
+        @include inline_block(calc(100% - 50px),top);
+        padding-left: 5%;
+    }
+
+    .name{
+        @include md-width{
+            @include inline_block(200px, top);
+        }
+        @include sm-width{
+            padding-bottom: 15px;
+        }
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .detail{
+        @include md-width{
+            @include inline_block(calc(100% - 200px), top);
+            font-size: 16px;
+        }
+        @include pc-width{
+            padding-left: 5%;
+        }
+        @include sm-width{
+            font-size: 14px;
+        }
+
+        >div{
+            padding-bottom: 10px;
+
+            &:nth-last-child(1){
+                padding-bottom: 0;
+            }
+        }
+    }
 }
