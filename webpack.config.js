@@ -1,6 +1,14 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  entry: {
+      index:"./src/index.js",
+      about:"./src/about.js"
+  },
+  output: {
+      path: __dirname + '/dist',
+      filename: "js/[name].js"
+  },
   module: {
     rules: [
       {
@@ -39,10 +47,22 @@ module.exports = {
       }
     ]
   },
+  // plugins: [
+  //   new HtmlWebPackPlugin({
+  //     template: "./src/index.html",
+  //     filename: "./index.html"
+  //   })
+  // ]
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
+      template: 'src/index.html',
+      filename: 'home.html',
+      chunks: ['home'] // 預設會將打包出的所有 js 插入 html。故需指明頁面需要的模組
+    }),
+    new HtmlWebPackPlugin({
+      template: 'src/index.html',
+      filename: 'about.html',
+      chunks: ['about']
     })
   ]
 };
